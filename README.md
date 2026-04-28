@@ -1,517 +1,88 @@
-````md
 # 📈 Intelligent Stock Recommendation & Prediction Engine
 
-A production-ready full-stack AI platform for intelligent stock recommendation, prediction, and portfolio decision support.
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-black?logo=vercel&style=for-the-badge)](https://stock-intelligence-eh7t.vercel.app)
+[![API Server](https://img.shields.io/badge/Backend-Render-blue?style=for-the-badge)](https://stock-intelligence-pnbe.onrender.com)
 
-This system is built as a real-world fintech product—not just a basic stock price prediction project. It combines Machine Learning, Financial Analysis, Technical Indicators, News Sentiment Analysis, and Personalized Investment Preferences to recommend suitable stocks with Buy / Hold / Sell decisions.
+A highly advanced, placement-ready Data Science framework designed for intelligent stock recommendation and algorithmic backtesting. 
+Originally prototyped on monolithic architectures, the system has been entirely upgraded into a scalable, decoupled **Full-Stack environment** featuring a **FastAPI Machine Learning Server** and a lightning-fast **React (Vite) Single-Page Application (SPA)**.
 
-The architecture is fully decoupled and deployed in production using:
-
-- **Frontend:** React + Vite (Hosted on Vercel)
-- **Backend:** FastAPI + Uvicorn (Hosted on Render)
-- **Database:** MySQL
-- **Containerization:** Docker + Docker Compose
-- **ML Engine:** Random Forest + XGBoost + Technical Analysis Pipeline
-
----
-
-# 🚀 Live Production Deployment
-
-## Frontend (Vercel)
-
-https://stock-intelligence-ten.vercel.app/
-
-## Backend (Render)
-
-https://stock-intelligence-pnbe.onrender.com
-
-## API Documentation (Swagger UI)
-
-https://stock-intelligence-pnbe.onrender.com/docs
+## 🚀 Key Features
+- **Machine Learning Classifiers:** Utilizes high-frequency `Random Forest` and `XGBoost` decision trees trained on complex technical vectors (RSI-14, MACD, EMA-20, Bollinger Bands) to calculate multivariate probability thresholds correlating to 30-day forward growth momentum.
+- **Real-Time NLP Sentiment:** Autonomous Natural Language Processing using `TextBlob` and global news APIs to calculate polarity assessments (-1.0 to 1.0) of real-time corporate media headlines.
+- **Historical Backtesting Simulator:** Calculates mathematical performance yield differentials simulating AI-derived portfolios against benchmark Nifty indices purely using historical daily closures over a rolling 6-month sliding window.
+- **Interactive UI (React + Vite):** A decoupled, pristine Vanilla CSS graphical interface rendering dynamic interactive `react-plotly.js` candlestick charting grids and seamless state management.
 
 ---
 
-# 🎯 Problem Statement
-
-Investors often struggle to choose the right stocks because:
-
-- Too much financial data exists
-- Manual analysis is difficult
-- Investment goals differ for every investor
-- Short-term and long-term strategies are different
-- News and sentiment significantly affect stock movement
-
-This system solves that problem by delivering personalized stock recommendations instead of generic stock predictions.
-
----
-
-# 🚀 Core Features
-
-## Personalized Stock Recommendation Engine
-
-The system asks users for:
-
-- Investment Type (Short-term / Long-term)
-- Risk Level (Low / Medium / High)
-- Investment Amount
-- Preferred Sector
-- Expected Return %
-- Dividend Preference
-- Market Cap Preference
-
-Based on these preferences, the platform recommends suitable stocks.
-
----
-
-## Machine Learning Prediction Engine
-
-Uses:
-
-- Random Forest Classifier
-- XGBoost Classifier
-
-to generate:
-
-- Strong Buy
-- Buy
-- Hold
-- Sell
-- Strong Sell
-
-recommendation labels based on 30-day forward return probability.
-
----
-
-## Technical Analysis Engine
-
-Generates advanced indicators such as:
-
-- RSI (14)
-- MACD
-- EMA (20)
-- SMA (50 / 200)
-- Bollinger Bands
-- Volatility Score
-- Momentum Score
-
-These are used as model features for recommendation prediction.
-
----
-
-## Real-Time News Sentiment Analysis
-
-Uses:
-
-- NewsAPI
-- TextBlob
-- VADER Sentiment
-
-to calculate sentiment polarity scores (-1.0 to +1.0) from recent company news headlines.
-
-This improves recommendation quality significantly.
-
----
-
-## Historical Backtesting Simulator
-
-Compares:
-
-- AI Recommended Portfolio
-
-vs
-
-- Nifty Benchmark Performance
-
-using historical rolling-window simulation over previous market periods.
-
-This validates recommendation performance.
-
----
-
-## Interactive Frontend Dashboard
-
-Built using:
-
-- React + Vite
-- Plotly Charts
-- Responsive UI
-- Production-safe API integration
-
-Dashboard shows:
-
-- Recommended Stocks
-- Buy / Sell Signals
-- Confidence Score
-- Predicted Return
-- Sentiment Score
-- Portfolio Allocation
-- Interactive Charts
-
----
-
-# 📂 Project Architecture
-
+## 📂 Project Architecture
 ```text
 stock_intelligence/
-│
-├── backend/
-│   ├── api/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   ├── models/
-│   │   ├── schemas/
-│   │   └── config/
-│   │
-│   ├── ml_engine/
-│   │   ├── data_collector.py
-│   │   ├── preprocessor.py
-│   │   ├── model_trainer.py
-│   │   ├── recommender.py
-│   │   └── sentiment_engine.py
-│   │
-│   ├── database/
-│   │   ├── db.py
-│   │   └── database_schema.sql
-│   │
-│   ├── main.py
-│   ├── requirements.txt
-│   └── Dockerfile
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   │
-│   ├── public/
-│   ├── package.json
-│   ├── vite.config.js
-│   ├── vercel.json
-│   └── Dockerfile
-│
-├── docker-compose.yml
-├── .gitignore
-├── Project_Report.md
-├── README.md
-└── requirements.txt
-````
-
----
-
-# ⚙️ Tech Stack
-
-## Frontend
-
-* React + Vite
-* JavaScript
-* Plotly.js
-* CSS
-* Axios
-
-## Backend
-
-* FastAPI
-* Uvicorn
-* Python
-
-## Machine Learning
-
-* Pandas
-* NumPy
-* Scikit-learn
-* XGBoost
-* TA Library
-* TextBlob
-* VADER
-
-## Database
-
-* MySQL
-
-## Deployment
-
-* Vercel
-* Render
-* Docker
-* Docker Compose
-
----
-
-# 🗄️ Database Tables
-
-Main MySQL tables:
-
-* users
-* user_preferences
-* stocks_master
-* stock_prices
-* financial_ratios
-* technical_indicators
-* news_sentiment
-* predictions
-* recommendations
-* portfolio_history
-
-These tables store both raw market data and generated recommendations.
-
----
-
-# ⚙️ Local Development Setup
-
-## Step 1 — Clone Repository
-
-```bash
-git clone <your-repository-url>
-cd stock_intelligence
+├── docker-compose.yml            # Universal Production Orchestrator
+├── Dockerfile                    # FastAPI & ML Backend Container
+├── .gitignore                    # Security and Node modules exclusion
+├── Project_Report.md             # Comprehensive Placement Academic Report
+├── database_schema.sql           # Raw MySQL deployment matrices
+├── run_pipeline.py               # Autonomous Dataset Pipeline trigger
+├── api.py                        # Uvicorn FastAPI REST Middleware Layer
+├── ml_engine/                    # Core Model & Data logic
+│   ├── data_collector.py         # Interfaces with yfinance & News APIs
+│   ├── preprocessor.py           # Technical Analysis & NLP Generation
+│   ├── model_trainer.py          # ML Model building and serialization
+│   └── recommender.py            # User Constraint Evaluation Logic
+└── frontend/                     # React Vite Workspace
+    ├── Dockerfile                # Multi-stage Nginx UI Container
+    ├── package.json              # Javascript dependencies
+    └── src/
+        ├── App.jsx               # Main React Dashboard Component
+        └── index.css             # Vanilla CSS Custom Aesthetics
 ```
 
 ---
 
-## Step 2 — Install Backend Dependencies
+## ⚙️ How to Deploy (Docker - Recommended)
+The fastest and most professional way to launch the system is using the pre-configured containerized environment.
 
+1. Ensure you have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
+2. Open a terminal in the root directory and construct the production ecosystems:
+```bash
+docker-compose up --build
+```
+3. Once compiled, access your application natively at `http://localhost:5173`.
+
+*(Note: Docker aggressively caches the heavy C++ ML dependencies. The very first run will take 3-5 minutes, but subsequent boots will take < 3 seconds).*
+
+---
+
+## ⚙️ How to Deploy (Manual Local Setup)
+If you prefer running the systems physically on your hardware without Docker:
+
+### 1. Data Processing Pipeline
+Activate your Python environment and generate the latest market weights:
 ```bash
 pip install -r requirements.txt
-```
-
----
-
-## Step 3 — Run Data Pipeline
-
-This fetches:
-
-* historical stock prices
-* financial ratios
-* technical indicators
-* sentiment data
-
-```bash
 python run_pipeline.py
 ```
 
----
-
-## Step 4 — Start Backend Server
-
+### 2. Boot the ML Backend
+Start the high-concurrency FastAPI middleware:
 ```bash
-python -m uvicorn main:app --reload
+python -m uvicorn api:app --reload
 ```
 
-Backend runs on:
-
-http://localhost:8000
-
-Swagger docs:
-
-http://localhost:8000/docs
-
----
-
-## Step 5 — Start Frontend
-
+### 3. Boot the React Client
+Open a secondary terminal, navigate to the UI module, and start the Vite web-server:
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Frontend runs on:
-
-http://localhost:5173
-
 ---
 
-# 🐳 Docker Deployment (Recommended)
+## 🌐 Live Production Environments
+This application has been fully decoupled and is physically deployed online:
 
-Production-ready containerized deployment:
+- **Frontend Application (Vercel):** [https://stock-intelligence-eh7t.vercel.app](https://stock-intelligence-eh7t.vercel.app) (also mapped to `stock-intelligence-ten.vercel.app`)
+- **FastAPI Machine Learning Backend (Render):** [https://stock-intelligence-pnbe.onrender.com](https://stock-intelligence-pnbe.onrender.com)
 
-```bash
-docker-compose up --build
-```
-
-This launches:
-
-* Frontend
-* Backend
-* Database
-
-using a single command.
-
----
-
-# 🌐 Production Deployment
-
-## Backend Deployment (Render)
-
-Hosted using:
-
-### Render Web Service
-
-Production backend URL:
-
-https://stock-intelligence-pnbe.onrender.com
-
-Features:
-
-* Auto Deploy from GitHub
-* Environment Variable Support
-* FastAPI Production Hosting
-* Swagger Documentation
-* Health Check Monitoring
-
----
-
-## Frontend Deployment (Vercel)
-
-Hosted using:
-
-### Vercel Static Deployment
-
-Production frontend URL:
-
-https://stock-intelligence-ten.vercel.app/
-
-Features:
-
-* GitHub Auto Deploy
-* Vite Native Support
-* Fast CDN Delivery
-* Production Build Optimization
-
----
-
-# 🔐 Important Production Configuration
-
-## Backend CORS Setup
-
-FastAPI CORS configured specifically for:
-
-```python
-allow_origins = [
-    "https://stock-intelligence-ten.vercel.app"
-]
-```
-
-No wildcard CORS used.
-
-Production-safe configuration only.
-
----
-
-## Frontend Environment Variable
-
-Create:
-
-frontend/.env
-
-Add:
-
-```env
-VITE_API_URL=https://stock-intelligence-pnbe.onrender.com
-```
-
-Used in React as:
-
-```javascript
-const API_URL = import.meta.env.VITE_API_URL;
-```
-
-No localhost dependency in production.
-
----
-
-# 📊 Example Recommendation Output
-
-## User Input
-
-* Long-term Investment
-* Medium Risk
-* ₹1,00,000 Investment
-* IT Sector
-* Dividend Required
-* Large Cap
-
-## System Output
-
-### Recommended Stocks
-
-1. TCS → Strong Buy
-2. Infosys → Buy
-3. HCL Tech → Hold
-
-### Suggested Allocation
-
-* TCS → 40%
-* Infosys → 35%
-* HCL → 25%
-
-### Predicted Return
-
-12–18%
-
-### Confidence Score
-
-87%
-
----
-
-# 🧠 ML Label Logic
-
-Recommendation labels are generated using future 30-day return:
-
-| Return % | Label |
-| -------- | ----- |
-| > 10%    | Buy   |
-| 0–10%    | Hold  |
-| < 0%     | Sell  |
-
-This becomes the target variable for training ML models.
-
----
-
-# 🚀 Future Improvements
-
-Possible upgrades:
-
-* LSTM Deep Learning Prediction
-* Live NSE/BSE API Integration
-* User Authentication
-* Portfolio Tracking
-* Watchlist Feature
-* Notification Alerts
-* AI Chat-based Financial Assistant
-* AWS Production Deployment
-* Redis + Celery Background Jobs
-
----
-
-# 💼 Resume-Ready Project Title
-
-## Intelligent Stock Recommendation and Prediction System Using Machine Learning and Financial Analysis
-
-This is much stronger than:
-
-"Stock Price Prediction Project"
-
-because it solves a real investment decision problem.
-
----
-
-# Final Result
-
-Users can:
-
-* Open frontend from Vercel
-* Submit investment preferences
-* Trigger backend API on Render
-* Get stock recommendations
-* View prediction results
-* Use the system fully online
-
-without localhost or manual backend startup.
-
-This makes the project industry-level and placement-ready.
-
-```
-```
+*(Note: The Render backend enforces strict multi-origin CORS validation ensuring only your authorized Vercel domains can execute REST calls).*

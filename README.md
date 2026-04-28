@@ -1,5 +1,8 @@
 # 📈 Intelligent Stock Recommendation & Prediction Engine
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-black?logo=vercel&style=for-the-badge)](https://stock-intelligence-eh7t.vercel.app)
+[![API Server](https://img.shields.io/badge/Backend-Render-blue?style=for-the-badge)](https://stock-intelligence-pnbe.onrender.com)
+
 A highly advanced, placement-ready Data Science framework designed for intelligent stock recommendation and algorithmic backtesting. 
 Originally prototyped on monolithic architectures, the system has been entirely upgraded into a scalable, decoupled **Full-Stack environment** featuring a **FastAPI Machine Learning Server** and a lightning-fast **React (Vite) Single-Page Application (SPA)**.
 
@@ -76,8 +79,10 @@ npm run dev
 
 ---
 
-## 🌐 Deploying to the Cloud
-This project is configured natively for completely free cloud scaling!
-- **FastAPI Backend:** Host automatically using [Railway.app](https://railway.app) (It will autonomously read the root `requirements.txt`).
-- **React Frontend:** Host automatically using [Vercel](https://vercel.com) (Just point Vercel directly to your `/frontend` directory). 
-*(Note: Be sure to update your `axios` fetch URLs in `App.jsx` from localhost to point to your live Railway backend link!)*
+## 🌐 Live Production Environments
+This application has been fully decoupled and is physically deployed online:
+
+- **Frontend Application (Vercel):** [https://stock-intelligence-eh7t.vercel.app](https://stock-intelligence-eh7t.vercel.app) (also mapped to `stock-intelligence-ten.vercel.app`)
+- **FastAPI Machine Learning Backend (Render):** [https://stock-intelligence-pnbe.onrender.com](https://stock-intelligence-pnbe.onrender.com)
+
+*(Note: The Render backend enforces strict multi-origin CORS validation ensuring only your authorized Vercel domains can execute REST calls).*

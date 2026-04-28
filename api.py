@@ -16,7 +16,10 @@ app = FastAPI(title="Intelligent Stock Recommendation API")
 # Allow CORS strictly for Vercel production frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://stock-intelligence-ten.vercel.app"],
+    allow_origins=[
+        "https://stock-intelligence-ten.vercel.app",
+        "https://stock-intelligence-eh7t.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

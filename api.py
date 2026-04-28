@@ -13,14 +13,18 @@ from ml_engine.preprocessor import analyze_sentiment
 
 app = FastAPI(title="Intelligent Stock Recommendation API")
 
-# Allow CORS for React frontend connecting from Vite port 5173
+# Allow CORS strictly for Vercel production frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://stock-intelligence-ten.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+def read_root():
+    return {"message": "Stock Recommendation API Running"}
 
 DATA_FILE = "latest_stock_data.csv"
 

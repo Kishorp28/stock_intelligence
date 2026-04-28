@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PlotlyGraph from 'react-plotly.js';
 const Plot = PlotlyGraph.default || PlotlyGraph;
 import { Sparkles, TrendingUp, ShieldAlert, BarChart3, Briefcase, RefreshCw, Zap, Network, Activity, Clock } from 'lucide-react';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
 const NIFTY_SYMBOLS = ['RELIANCE.NS', 'TCS.NS', 'HDFCBANK.NS', 'INFY.NS', 'ICICIBANK.NS', 'HINDUNILVR.NS', 'SBIN.NS', 'ITC.NS', 'ASIANPAINT.NS', 'BAJFINANCE.NS', 'L&T.NS', 'HCLTECH.NS', 'MARUTI.NS', 'SUNPHARMA.NS', 'TATAMOTORS.NS', 'TATASTEEL.NS', 'WIPRO.NS', 'ONGC.NS', 'NTPC.NS', 'HDFCLIFE.NS'];
 
@@ -16,7 +18,7 @@ const StockCard = ({ rec }) => {
     if (!expanded && !history) {
       setLoadingChart(true);
       try {
-        const res = await axios.get(`http://127.0.0.1:8000/api/history/${rec.symbol}`);
+        const res = await axios.get(`${API_BASE_URL}/api/history/${rec.symbol}`);
         setHistory(res.data);
       } catch (err) {
         console.error(err);
@@ -107,6 +109,7 @@ function App() {
   const [error, setError] = useState(null);
 
   // Expansions State
+  const [wakingServer, setWakingServer] = useState(false);
   const [newsQuery, setNewsQuery] = useState('RELIANCE.NS');
   const [newsData, setNewsData] = useState(null);
   const [newsLoading, setNewsLoading] = useState(false);
@@ -127,7 +130,7 @@ function App() {
     if (tab === 'market' && !marketData) {
       setMarketLoading(true);
       try {
-        const res = await axios.get('http://127.0.0.1:8000/api/market-data');
+        const res = await axios.get(`${API_BASE_URL}/api/market-data`);
         setMarketData(res.data);
       } catch (err) {
         console.error(err);
@@ -139,17 +142,22 @@ function App() {
   const submitProfile = async () => {
     setLoading(true);
     setError(null);
+    const wakeTimer = setTimeout(() => setWakingServer(true), 3500); // Trigger cold-start warning after 3.5s
     try {
-      const res = await axios.post('http://127.0.0.1:8000/api/recommend', formData);
+      const res = await axios.post(`${API_BASE_URL}/api/recommend`, formData);
+      clearTimeout(wakeTimer);
+      setWakingServer(false);
       setResults(res.data.recommendations || []);
       if(res.data.status === 'partial') {
           setError(res.data.message);
       }
     } catch (err) {
+      clearTimeout(wakeTimer);
+      setWakingServer(false);
       if (err.response && err.response.data) {
         setError(err.response.data.detail);
       } else {
-        setError("Fatal Error connecting to Intelligent AI. Make sure Python FastAPI is running.");
+        setError(`Network Error: Could not connect to the API at ${API_BASE_URL}. Ensure the backend is online and CORS is configured.`);
       }
       setResults([]);
     }
@@ -159,7 +167,7 @@ function App() {
   const fetchNews = async () => {
       setNewsLoading(true);
       try {
-          const res = await axios.get(`http://127.0.0.1:8000/api/news/${newsQuery}`);
+          const res = await axios.get(`${API_BASE_URL}/api/news/${newsQuery}`);
           setNewsData(res.data);
       } catch (e) {
           console.error(e);
@@ -178,7 +186,7 @@ function App() {
       }
       setBacktestLoading(true);
       try {
-          const res = await axios.post(`http://127.0.0.1:8000/api/backtest`, { symbols: symbolsToRun, initial_capital: formData.investment_amount });
+          const res = await axios.post(`${API_BASE_URL}/api/backtest`, { symbols: symbolsToRun, initial_capital: formData.investment_amount });
           setBacktestData({...res.data, isDefault});
       } catch (e) {
           console.error(e);
@@ -305,6 +313,12 @@ function App() {
               <button className="btn-primary" onClick={submitProfile} disabled={loading}>
                 {loading ? <RefreshCw className="spinner-icon" /> : 'Run Predictive Allocation Models'}
               </button>
+              
+              {wakingServer && (
+                <div style={{color: 'var(--primary-color)', textAlign: 'center', marginTop: '1.5rem', fontWeight: 'bold'}}>
+                  <RefreshCw className="spinner-icon" /> Waking up Render server (this takes ~50 seconds initially on free tier)...
+                </div>
+              )}
             </div>
 
             {error && <div style={{padding: '1rem', background: '#fef2f2', color: '#ef4444', borderRadius: '8px', border: '1px solid #fca5a5', marginTop: '2rem'}}>

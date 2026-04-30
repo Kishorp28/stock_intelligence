@@ -46,7 +46,7 @@ The fastest and most professional way to launch the system is using the pre-conf
 2. Open a terminal in the root directory and construct the production ecosystems:
 ```bash
 docker-compose up --build
-```
+``
 3. Once compiled, access your application natively at `http://localhost:5173`.
 
 *(Note: Docker aggressively caches the heavy C++ ML dependencies. The very first run will take 3-5 minutes, but subsequent boots will take < 3 seconds).*
